@@ -14,8 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from project.VMDescriptor import VMDescriptor
-from project.TestDescriptor import TestDescriptor
-from os.path import join
 
 # export function name that should be called from each Wasm module
 test_export_function_name = "main"
@@ -53,7 +51,6 @@ vm_descriptors = {
     "wasmi"  : VMDescriptor("/engines/wasmi/target/release/examples/invoke", "{wasm_file_path} {function_name}"),
 
     "asmble" : VMDescriptor("/engines/asmble/bin/asmble", "invoke -in {wasm_file_path} {function_name}")
-    #"asmble" : VMDescriptor("/engines/asmble/bin/asmble", "invoke -in {wasm_file_path} {function_name} -defmaxmempages 20000")
 
     # "wasmer" : VMDescriptor("/engines/wasmer/target/release/wasmer", "run {wasm_file_path}", True),
     # we have binaryen, but calling wasm-shell -e main is not working
