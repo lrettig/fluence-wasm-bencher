@@ -5,9 +5,8 @@ FROM ubuntu:18.04
 # System deps
 RUN apt-get update
 RUN apt-get install -y software-properties-common git sudo build-essential wget curl nano \
-    autoconf automake cmake libtool make unzip zlib1g-dev texinfo \
+    autoconf automake libtool make unzip zlib1g-dev texinfo \
     gcc musl-dev
-
 
 # Install Python stack
 RUN apt-get update \
@@ -40,6 +39,9 @@ RUN ln -s /root/go/src/github.com/ethereum/go-ethereum /go-ethereum
 #COPY ./sha1_test.go /go-ethereum/core/vm/runtime/sha_test.go
 #RUN cd /go-ethereum/core/vm/runtime && go test -bench BenchmarkSHA1 -benchtime 5s
 
+# Install cmake
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.3/cmake-3.14.3-Linux-x86_64.sh
+RUN sh cmake-3.14.3-Linux-x86_64.sh --skip-license --prefix=/usr
 
 # install python modules needed for benchmarking script
 RUN pip3 install durationpy jinja2 pandas
